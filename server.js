@@ -23,18 +23,15 @@ mercadopago.configure({
 });
 
 app.post('/create_payment', async (req, res) => {
-  const { title, quantity, price } = req.body;
-
-  const preference = {
-    items: [
-      {
-        title,
-        unit_price: price,
-        quantity,
-      },
-    ],
-  };
-
+    const products = req.body;
+  
+    const preference = {
+      items: products.map(product => ({
+        title: product.title,
+        unit_price: product.price,
+        quantity: product.quantity,
+      })),
+    };
   try {
     const payment = await mercadopago.preferences.create(preference);
     res.status(200).send({ id: payment.body.id });
