@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const mercadopago = require('mercadopago');
+const MercadoPago = require('mercadopago');
 
 const app = express();
 
@@ -17,7 +17,7 @@ app.use(cors({
 }));
 
 // Substitua com suas credenciais do Mercado Pago
-mercadopago.configure({
+MercadoPago.configure({
   access_token: 'TEST-2684905602430236-052513-51d07b1caa42a7938ab7e2a9f13a7f98-135153905',
   
 });
