@@ -39,7 +39,7 @@ app.post('/create_payment', async (req, res) => {
     };
   
     try {
-      const payment = await mercadopago.preferences.create(preference);
+      const payment = await MercadoPago.preferences.create(preference);
       res.status(200).send({ id: payment.body.id });
     } catch (err) {
       console.error(err);
