@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 // Substitua com suas credenciais do Mercado Pago
 mercadopago.configure({
   access_token: 'TEST-2684905602430236-052513-51d07b1caa42a7938ab7e2a9f13a7f98-135153905',
-  integrator_id: 'TEST-c3b08660-7c79-431e-aced-7dceeffec5f5'
+  
 });
 
 app.post('/create_payment', async (req, res) => {
