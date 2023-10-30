@@ -32,14 +32,16 @@ app.post('/create_payment', async (req, res) => {
         quantity: product.quantity,
       })),
     };
-  try {
-    const payment = await mercadopago.preferences.create(preference);
-    res.status(200).send({ id: payment.body.id });
-  } catch (err) {
-    console.error(err);
-    res.status(500).send({ error: 'Creating payment failed' });
-  }
-});
+  
+    try {
+      const payment = await mercadopago.preferences.create(preference);
+      res.status(200).send({ id: payment.body.id });
+    } catch (err) {
+      console.error(err);
+      res.status(500).send({ error: 'Creating payment failed' });
+    }
+  });
+  
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
