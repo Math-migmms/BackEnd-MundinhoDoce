@@ -25,7 +25,12 @@ MercadoPago.configure({
 app.post('/create_payment', async (req, res) => {
     const products = req.body;
   
+    const order = {
+      // Adicione informações adicionais do pedido aqui, como ID do pedido, usuário, etc.
+    };
+  
     const preference = {
+      external_reference: order.id, // o ID do seu pedido
       items: products.map(product => ({
         title: product.title,
         unit_price: product.price,
@@ -41,6 +46,7 @@ app.post('/create_payment', async (req, res) => {
       res.status(500).send({ error: 'Creating payment failed' });
     }
   });
+  
   
 
 const PORT = process.env.PORT || 4000;
