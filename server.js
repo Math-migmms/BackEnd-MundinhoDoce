@@ -14,24 +14,28 @@ mercadopago.configure({  // Note que aqui é tudo em minúsculas
 });
 
 app.post('/create_payment', async (req, res) => {
-  const products = req.body;
-
-  const preference = {
-    items: products.map(product => ({
-      title: product.title,
-      unit_price: parseFloat(product.price),
-      quantity: parseInt(product.quantity),
-    })),
-  };
-
-  try {
-    const payment = await mercadopago.preferences.create(preference);
-    res.status(200).send({ id: payment.body.id });
-  } catch (err) {
-    console.error(err);
-    res.status(500).send({ error: 'Creating payment failed' });
-  }
-});
+    const products = req.body;
+  
+    console.log("Produtos recebidos do frontend:", products);  // Log de Depuração
+  
+    const preference = {
+      items: products.map(product => ({
+        title: product.title,
+        unit_price: parseFloat(product.price),
+        quantity: parseInt(product.quantity),
+      })),
+    };
+  
+    try {
+      const payment = await mercadopago.preferences.create(preference);
+      console.log("Resposta da API do Mercado Pago:", payment);  // Log de Depuração
+      res.status(200).send({ id: payment.body.id });
+    } catch (err) {
+      console.error(err);
+      res.status(500).send({ error: 'Creating payment failed' });
+    }
+  });
+  
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
