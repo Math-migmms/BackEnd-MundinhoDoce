@@ -5,8 +5,16 @@ const mercadopago = require('mercadopago');
 
 const app = express();
 
+// Para permitir qualquer origem (não recomendado para produção)
 app.use(cors());
-app.use(bodyParser.json());
+
+// Ou especificar a origem permitida
+app.use(cors({
+  origin: 'http://localhost:3000',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  optionsSuccessStatus: 204,
+}));
 
 // Substitua com suas credenciais do Mercado Pago
 mercadopago.configure({
